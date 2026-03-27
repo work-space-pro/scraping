@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Verifier PRO</title>
+    <style>
+        body {background:#0f172a;color:white;font-family:Arial;text-align:center;}
+        input,button {padding:10px;margin:5px;border-radius:8px;border:none;}
+        button {background:#22c55e;color:white;cursor:pointer;}
+    </style>
+</head>
+<body>
+
+<h1>🚀 Email Verifier PRO</h1>
+
+<h3>Verify Email</h3>
+<input type="text" id="email" placeholder="Enter email">
+<button onclick="verify()">Verify</button>
+
+<h3>Find Email</h3>
+<input type="text" id="name" placeholder="Full Name">
+<input type="text" id="domain" placeholder="company.com">
+<button onclick="find()">Find</button>
+
+<h3>Bulk Verify</h3>
+<form action="/upload" method="post" enctype="multipart/form-data">
+<input type="file" name="file">
+<button type="submit">Upload</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+const BASE_URL = "";
+
+async function verify(){
+ let email=document.getElementById("email").value;
+ let res=await fetch(BASE_URL+"/verify?email="+email);
+ let data=await res.text();
+ document.getElementById("result").innerHTML=data;
+}
+
+async function find(){
+ let name=document.getElementById("name").value;
+ let domain=document.getElementById("domain").value;
+ let res=await fetch(BASE_URL+"/find?name="+name+"&domain="+domain);
+ let data=await res.text();
+ document.getElementById("result").innerHTML=data;
+}
+</script>
+
+</body>
+</html>
